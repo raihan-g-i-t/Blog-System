@@ -28,6 +28,7 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             text-align: center;
             width: 350px;
+            gap: 100px;
         }
 
         /* Title */
@@ -35,6 +36,7 @@
             font-size: 28px;
             margin-bottom: 20px;
             letter-spacing: 1.5px;
+            gap: 100px;
         }
 
         /* Input Fields */
