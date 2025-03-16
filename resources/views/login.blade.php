@@ -9,10 +9,6 @@
 <body>
 
 <div class="login-container">
-    <a href="{{ route('index') }}"><h3>Name</h3></a>
-</div>
-
-<div class="login-container">
     <h1>Login</h1>
     <form action="" method="POST">
         <label class="message">{{session('data') ?? ""}}</label>

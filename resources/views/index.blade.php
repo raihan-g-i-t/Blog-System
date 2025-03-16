@@ -9,23 +9,7 @@
 
 <body>
     <!-- Header -->
-    <header>
-        <div class="logo">
-            <h1>P2P Exchange</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#trade">Trade</a></li>
-                <li><a href="#wallet">Wallet</a></li>
-                <li><a href="#support">Support</a></li>
-            </ul>
-        </nav>
-        <div class="auth-buttons">
-            <a href="{{ route('login') }}"> <button id="loginBtn">Login</button> </a>
-            <a href="{{ route('user.registration') }}"><button id="registerBtn">Register</button></a>
-        </div>
-    </header>
+     @include('header')
 
     <!-- Hero Section -->
     <section class="hero">
@@ -75,14 +59,7 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 P2P Exchange. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="#contact">Contact Us</a>
-        </div>
-    </footer>
+     @include('footer')
 
 </body>
 </html>
