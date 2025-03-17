@@ -4,31 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Services\LoginService;
+use App\Http\services\loginService;
 
 class loginController extends Controller
 {
     private $loginService;
     public function __construct(){
-        $this->loginService = new LoginService();
+        $this->loginService = new loginService();
     }
-
     public function index(){
         return view('index');
     }
-
     public function register(){
         return view('user.registration');
     }
-
     public function register_store(Request $request){
-        
         $this->loginService->user_registration($request);
-        // DB::table('users')->insert([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password)
-
-        // ]);
+        
+        return redirect()->route('login', )->with('success', 'Registration Successful');
     }
 }

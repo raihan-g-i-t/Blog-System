@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\services;
 
 use Illuminate\Support\Facades\DB;
 
-class LoginService{
+class loginService{
 
     public function user_registration($data){
         DB::table('users')->insert([

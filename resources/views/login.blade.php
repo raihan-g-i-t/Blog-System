@@ -8,6 +8,10 @@
 </head>
 <body>
 
+@if(session('success'))
+    @include('modal');
+@endif
+
 <div class="login-container">
     <h1>Login</h1>
     <form action="" method="POST">
