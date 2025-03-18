@@ -98,3 +98,8 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        .text-danger{
+            color: red;
+            font-size: large;
+            font-weight: bold;
+        }

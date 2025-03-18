@@ -23,15 +23,14 @@ class LoginMiddleware
         ]);
 
         if(Auth::attempt($credentials)){
-            if(Auth::user() == 1){
-                
+            if(Auth::user()->role == 1){
+                return $next($request);
             }else{
-
+                echo "Your are a Admin";
+                die;
             }
         }else{
-
+            return redirect()->route('login')->with('success', 'Invalid credentials');
         }
-
-        return $next($request);
     }
 }

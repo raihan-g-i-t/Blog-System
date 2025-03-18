@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\services;
+namespace App\services;
 
 use Illuminate\Support\Facades\DB;
 
@@ -14,5 +14,4 @@ class loginService{
 
         ]);
     }
-
 }
