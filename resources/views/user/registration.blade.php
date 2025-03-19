@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
     <link rel="stylesheet" href="{{asset('css/user/registration.css')}}">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     
 </head>
 <body>
@@ -21,7 +22,7 @@
     </div>
 @endif -->
 
-        <form action="" method="POST">
+        <form action="" method="POST" id="demo-form">
             @csrf
 
             <div class="input-group">
@@ -53,7 +54,14 @@
                 <label for="confirm-password">Confirm Password</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
             </div> -->
-            <button type="submit">Register</button>
+            @error('g-recaptcha-response')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+
+            <button class="g-recaptcha" 
+                    data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}" 
+                    data-callback='onSubmit' 
+                    data-action='submit'>Register</button>
         </form>
         <div class="footer">
             <p>Already have an account? <a href="{{route("login")}}">Log in</a></p>
@@ -63,6 +71,12 @@
     @if(session('success'))
         @include('user.modal');
     @endif
+
+<script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
     
 </body>
 </html>

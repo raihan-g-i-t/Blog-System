@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ReCaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegistrationValidateRequest extends FormRequest
@@ -24,7 +25,8 @@ class RegistrationValidateRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required'
+            'password' => 'required',
+            'g-recaptcha-response' => [new ReCaptcha()]
         ];
     }
     public function messages()

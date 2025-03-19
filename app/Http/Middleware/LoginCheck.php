@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginMiddleware
+class LoginCheck
 {
     /**
      * Handle an incoming request.
@@ -17,19 +17,14 @@ class LoginMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-        $credentials = $request->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        if(Auth::attempt($credentials)){
+        if(Auth::check()){
             if(Auth::user()->role == 1){
                 return $next($request);
             }else{
-                return redirect()->route('admin.dash');
+                return redirect()->route('index');
             }
         }else{
-            return redirect()->route('login')->with('success', 'Invalid credentials');
+            return redirect()->route('login')->with('success', 'Login First');
         }
     }
 }
