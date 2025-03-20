@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginValidateRequest;
 use App\Http\Requests\RegistrationValidateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class loginController extends Controller
         return view('index');
     }
 
-    public function login_validate(){
+    public function login_validate(LoginValidateRequest $request){
+        
         return redirect()->route('user.profile');
     }
 

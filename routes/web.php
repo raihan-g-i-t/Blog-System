@@ -8,10 +8,10 @@ Route::get('/',[loginController::class, 'index'])->name('index');
 
 Route::view('/login','login')->name('login');
 
-Route::middleware('login-middleware')->group(function(){
-    Route::post('/login',[loginController::class,'login_validate'])->name('login.validate');
+Route::middleware('auth')->group(function(){
 });
 
+Route::post('/login',[loginController::class,'login_validate'])->name('login.validate');
 Route::middleware('user.login.check')->group(function(){
     Route::get('/user_dashboard',[loginController::class,'user_dashboard'])->name('user.profile');
 });
