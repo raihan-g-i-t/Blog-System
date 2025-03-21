@@ -2,6 +2,7 @@
 
 namespace App\services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class loginService{
@@ -13,5 +14,8 @@ class loginService{
             'password' => bcrypt($data->password)
 
         ]);
+    }
+    public function userLoginValidate(array $data){
+        return Auth::attempt($data);
     }
 }

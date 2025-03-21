@@ -13,7 +13,7 @@ class loginController extends Controller
 {
     private $loginService;
     public function __construct(){
-        $this->loginService = new loginService();
+        $this->loginService = new loginService;
     }
     public function index(){
         return view('index');
@@ -21,7 +21,12 @@ class loginController extends Controller
 
     public function login_validate(LoginValidateRequest $request){
         
-        return redirect()->route('user.profile');
+        if($this->loginService->userLoginValidate($request->only('email', 'password'))){
+            return redirect()->route('user.profile');
+        }else{
+            return redirect()->route('login')->with('success', 'Invalid credentials');
+        }
+        
     }
 
     public function user_dashboard(){
