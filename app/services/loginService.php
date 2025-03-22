@@ -16,6 +16,14 @@ class loginService{
         ]);
     }
     public function userLoginValidate(array $data){
-        return Auth::attempt($data);
+        if(Auth::attempt($data)){
+            if(Auth::user()->role==1){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            return  3;
+        }
     }
 }

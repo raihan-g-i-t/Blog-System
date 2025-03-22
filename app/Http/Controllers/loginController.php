@@ -21,12 +21,15 @@ class loginController extends Controller
 
     public function login_validate(LoginValidateRequest $request){
         
-        if($this->loginService->userLoginValidate($request->only('email', 'password'))){
+        $role = $this->loginService->userLoginValidate($request->only('email', 'password'));
+
+        if($role == 1){
             return redirect()->route('user.profile');
+        }elseif($role == 0){
+            return redirect()->route('admin.dash');
         }else{
             return redirect()->route('login')->with('success', 'Invalid credentials');
         }
-        
     }
 
     public function user_dashboard(){
