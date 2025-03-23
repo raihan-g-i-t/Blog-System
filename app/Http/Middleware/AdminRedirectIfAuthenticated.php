@@ -19,6 +19,7 @@ class AdminRedirectIfAuthenticated
     {
         if (Auth::guard('admin')->check()) {
             // return redirect(RouteServiceProvider::HOME);
+            return redirect()->route('admin.dash');
         }
 
         return $next($request);

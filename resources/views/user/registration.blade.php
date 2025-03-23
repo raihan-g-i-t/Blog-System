@@ -27,14 +27,14 @@
 
             <div class="input-group">
                 <label for="full-name">Full Name</label>
-                <input type="text" id="full-name" name="name" placeholder="Enter your full name" required>
+                <input type="text" id="full-name" name="name" placeholder="Enter your full name" value="{{ old('name') }}" required>
             </div>
             @error('name')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
             <div class="input-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
             </div>
             @error('email')
                 <span class="text-danger">{{ $message }}</span>
