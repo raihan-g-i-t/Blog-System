@@ -21,7 +21,7 @@
             </ul>
         </nav>
         <div class="auth-buttons">
-            <a href="{{ route('login') }}"> <button id="loginBtn">Login</button> </a>
+            <a href="{{ route('user.login') }}"> <button id="loginBtn">Login</button> </a>
             <a href="{{ route('user.registration') }}"><button id="registerBtn">Register</button></a>
         </div>
 </header>

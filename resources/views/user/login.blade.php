@@ -17,7 +17,7 @@
 <div class="login-container">
     <h1>Login</h1>
  
-    <form action="{{ route('admin.login.validate') }}" method="POST" id="demo-form">
+    <form action="{{ route('user.login.validate') }}" method="POST" id="demo-form">
         <label class="message">{{session('data') ?? ""}}</label>
         @csrf
         <div class="input-group">

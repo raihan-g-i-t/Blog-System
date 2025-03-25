@@ -9,7 +9,9 @@
 
 <h1>User Dashboard</h1>
 
-<a href="{{ route('logout') }}"> <button type="submit">logout</button> </a>
+{{ Auth::user()->email }}
+
+<a href="{{ route('user.logout') }}"> <button type="submit">logout</button> </a>
     
 </body>
 </html>
