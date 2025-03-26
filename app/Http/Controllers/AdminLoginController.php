@@ -37,6 +37,6 @@ class AdminLoginController extends Controller
     }
 
     public function adminDash(){
-        return view('admin.dash');
+        return view('admin.dashboard');
     }
 }

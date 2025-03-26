@@ -3,63 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2P Trading Platform</title>
+    <title>Blog System</title>
     <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 </head>
-
 <body>
-    <!-- Header -->
-     @include('header')
-
+     <!-- Navbar -->
+     <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">Blog System</h1>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#blogs">Blogs</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="auth-links">
+                @guest
+                    <a href="{{ route('user.login') }}" class="btn">Login</a>
+                    <a href="{{ route('user.registration') }}" class="btn">Sign Up</a>
+                @else
+                    <div class="profile-menu">
+                        <img src="{{ asset('css/profile.png') }}" alt="Profile" id="profile-icon">
+                        <ul class="dropdown hidden" id="profile-dropdown">
+                            <li><a href="{{ route('user.profile') }}">Profile</a></li>
+                            <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                @endguest
+            </div>
+        </div>
+    </nav>
+    
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2>Trade Directly with Others</h2>
-            <p>Join the world's leading P2P trading platform. Buy and sell cryptocurrencies securely and efficiently.</p>
-            <button id="startTradingBtn">Start Trading</button>
-        </div>
-        <div class="hero-image">
-            <img src="background.jpg" alt="P2P Trading">
+            <h1>Welcome to Our Blog</h1>
+            <p>Discover amazing articles on various topics</p>
+            <a href="#blogs" class="btn">Explore Blogs</a>
         </div>
     </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="feature">
-            <h3>Secure Transactions</h3>
-            <p>Your funds are protected with our advanced escrow system. Trade with confidence knowing your assets are safe.</p>
-        </div>
-        <div class="feature">
-            <h3>Low Fees</h3>
-            <p>Enjoy minimal trading fees compared to traditional exchanges. Save more while trading.</p>
-        </div>
-        <div class="feature">
-            <h3>24/7 Support</h3>
-            <p>Our dedicated support team is available around the clock to assist you with any issues.</p>
+    
+    <!-- Slider Section -->
+    <section class="slider-section">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>1. Sign Up</h3>
-                <p>Create an account and verify your identity to start trading.</p>
-            </div>
-            <div class="step">
-                <h3>2. Find a Trade</h3>
-                <p>Browse offers from other users or create your own trade offer.</p>
-            </div>
-            <div class="step">
-                <h3>3. Trade Securely</h3>
-                <p>Use our escrow system to ensure a safe and fair transaction.</p>
-            </div>
+    
+    <!-- Blog Preview Section -->
+    <section id="blogs" class="blog-section">
+        <h2>Latest Blogs</h2>
+        <div class="blog-container">
+            
         </div>
     </section>
 
     <!-- Footer -->
-     @include('footer')
+    <footer class="footer">
+        <p>&copy; 2025 Blog System. All rights reserved.</p>
+    </footer>
 
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+        document.getElementById("profile-icon")?.addEventListener("click", function() {
+            document.getElementById("profile-dropdown").classList.toggle("hidden");
+        });
+    </script>
 </body>
 </html>
