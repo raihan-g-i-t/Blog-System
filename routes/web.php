@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserLoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,15 +25,22 @@ Route::group(['prefix' => 'account'], function(){
 });
 
 Route::group(['prefix' => 'admin'], function(){
-
+    
     Route::group(['middleware' => 'admin.guest'], function(){
-
+        
         Route::view('/login','login')->name('login');
         Route::post('/login',[AdminLoginController::class,'login_validate'])->name('admin.login.validate');
     });
     
     Route::group(['middleware' => 'admin.auth'], function(){
 
+        Route::group(['prefix' => 'category'], function(){
+
+            Route::get('/',[CategoriesController::class,'categories'])->name('admin.categories');
+            Route::get('/data',[CategoriesController::class,'getData'])->name('categories.data');
+            Route::get('/edit/{id}',[CategoriesController::class,'editCategory'])->name('edit.category');
+        });
+        
         Route::get('/admin_dashboard',[AdminLoginController::class,'adminDash'])->name('admin.dash');
         Route::get('/logout',[AdminLoginController::class,'logout'])->name('logout');
     });
