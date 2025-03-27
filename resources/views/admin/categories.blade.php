@@ -6,6 +6,8 @@ Categories
 
 @section('content')
 
+<button id="add-category"> Add Category</button>
+
 <table id="DataTables">
     <thead>
         <th>ID</th>
