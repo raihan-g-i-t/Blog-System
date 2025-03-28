@@ -97,6 +97,7 @@
       }
   
       th {
+        margin-top: 5px;
         background-color: #3498db;
         color: white;
       }
@@ -104,25 +105,8 @@
       tr:hover {
         background-color: #f2f2f2;
       }
-
-
-
-    .btn-primary {
-      color: #fff;
-      background-color: #0d6efd;
-      border-color: #0d6efd;
-  }
-  
-  .btn-primary:hover {
-      background-color: #0b5ed7;
-      border-color: #0a58ca;
-  }
-  
-  .btn-primary:focus {
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
-  }
     
-  .custom-btn-edit, .custom-btn-delete {
+  #add-category, .custom-btn-edit, .custom-btn-delete {
     text-decoration: none;
     display: inline-block;
     font-size: 0.875rem; /* Small button size */
@@ -147,20 +131,9 @@
 }
 
 #add-category{
-  color: white;
-  background-color: #0d91fd;
+  background-color: #068f2d;
   margin-bottom: 20px;
   padding: 15px;
-  border-radius: 8%;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 0.875rem; /* Small button size */
-  background-color: #622be2;
-  border: 1px solid #0d6efd;
-  border-radius: 0.25rem;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
 

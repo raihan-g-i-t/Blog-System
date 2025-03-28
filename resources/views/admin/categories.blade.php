@@ -6,7 +6,7 @@ Categories
 
 @section('content')
 
-<button id="add-category"> Add Category</button>
+<a href="{{ route('add.category') }}"> <button id="add-category"> Add Category</button> </a>
 
 <table id="DataTables">
     <thead>
