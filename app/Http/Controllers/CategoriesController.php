@@ -37,17 +37,31 @@ class CategoriesController extends Controller
     }
 
     public function saveCategory(CategoryCreateRequest $request){
+        
         Category::create([
             'title' => $request->title,
             'status' => $request->status,
         ]);
 
-        return redirect()->route('categories')->with('sucecss', 'Category added Successful');
+        return redirect()->route('categories')->with('success', 'Category added Successful');
     }
 
     public function editCategory($id){
         $category = Category::findOrFail($id);
+        
+        return view('admin.add-category', 
+        ['data' => $category, 'heading' => 'Edit Category', 'button' => 'Save', 'url' => 'editCategory.store']);
+    }
 
-        return view('admin.add-category', ['data' => $category]);
+    public function editCategoryStore(CategoryCreateRequest $request, $id){
+
+        $category = Category::findOrFail($id);
+
+        $category->update([
+            'title' => $request->title,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('categories')->with('success', 'Category updated Successful');
     }
 }

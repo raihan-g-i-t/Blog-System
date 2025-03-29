@@ -33,7 +33,7 @@
     @yield('content')
 
     @if(session('success'))
-        @include('user.modal');
+        @include('modal');
     @endif
 
   </div>

@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin'], function(){
             Route::get('/',[CategoriesController::class,'categories'])->name('categories');
             Route::get('/data',[CategoriesController::class,'getData'])->name('categories.data');
             Route::get('/edit/{id}',[CategoriesController::class,'editCategory'])->name('edit.category');
+            Route::post('/edit/{id?}',[CategoriesController::class,'editCategoryStore'])->name('editCategory.store');
             Route::get('/add',[CategoriesController::class,'addCategory'])->name('add.category');
             Route::post('/add',[CategoriesController::class,'saveCategory'])->name('save.category');
         });
