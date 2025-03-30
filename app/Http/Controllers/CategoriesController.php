@@ -24,7 +24,7 @@ class CategoriesController extends Controller
             ->addColumn('action', function ($category) {
                 return '
                     <a href="'.route('edit.category', $category->id).'" class="custom-btn-edit">Edit</a>
-                    <button class="custom-btn-delete" data-id="'.$category->id.'">Delete</button>
+                    <a href="'.route('delete.category', $category->id).'" class="custom-btn-delete">Delete</button>
                 ';
             })
             ->rawColumns(['action', 'status'])
@@ -63,5 +63,13 @@ class CategoriesController extends Controller
         ]);
 
         return redirect()->route('categories')->with('success', 'Category updated Successful');
+    }
+
+    public function deleteCategory($id){
+
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories')->with('success', 'Category deleted Successful');
     }
 }

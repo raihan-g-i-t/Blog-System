@@ -29,8 +29,8 @@ Categories
                     { data: 'status', name: 'status' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]
-            });
-        });
+            })
+        })
 </script>
 
 @endsection
