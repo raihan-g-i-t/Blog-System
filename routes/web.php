@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserLoginController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,11 @@ Route::group(['prefix' => 'admin'], function(){
             Route::get('/add',[CategoriesController::class,'addCategory'])->name('add.category');
             Route::post('/add',[CategoriesController::class,'saveCategory'])->name('save.category');
             Route::get('/delete/{id}',[CategoriesController::class,'deleteCategory'])->name('delete.category');
+        });
+
+        Route::group(['prefix' => 'blog'],function(){
+            Route::get('/',[BlogController::class, 'index'])->name('blog');
+            Route::post('/',[BlogController::class, 'store'])->name('blog.store');
         });
         
         Route::get('/admin_dashboard',[AdminLoginController::class,'adminDash'])->name('admin.dash');
