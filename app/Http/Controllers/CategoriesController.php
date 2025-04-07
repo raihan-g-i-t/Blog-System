@@ -23,8 +23,8 @@ class CategoriesController extends Controller
             })
             ->addColumn('action', function ($category) {
                 return '
-                    <a href="'.route('edit.category', $category->id).'" class="custom-btn-edit">Edit</a>
-                    <a href="'.route('delete.category', $category->id).'" class="custom-btn-delete">Delete</button>
+                    <a href="'.route('edit.category', $category->id).'" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="'.route('delete.category', $category->id).'" class="btn btn-danger btn-sm delete-btn">Delete</button>
                 ';
             })
             ->rawColumns(['action', 'status'])

@@ -106,34 +106,21 @@
         background-color: #f2f2f2;
       }
     
-  #add-category, .custom-btn-edit, .custom-btn-delete {
+  #add-category{
     text-decoration: none;
     display: inline-block;
     font-size: 0.875rem; /* Small button size */
     padding: 0.25rem 0.5rem;
     color: white;
-    background-color: #0d6efd;
     border: 1px solid #0d6efd;
     border-radius: 0.25rem;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    background-color: #046cfc;
+    margin-bottom: 20px;
+    padding: 15px;
 }
 
-.custom-btn-edit:hover {
-    background-color: #3bd70b;
-    border-color: #0a58ca;
-}
-
-.custom-btn-delete:hover {
-  background-color: #d70b60;
-  border-color: #0a58ca;
-}
-
-#add-category{
-  background-color: #068f2d;
-  margin-bottom: 20px;
-  padding: 15px;
-}
 
 

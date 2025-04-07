@@ -17,8 +17,7 @@
     <h2>Admin Panel</h2>
     <a href="{{route('admin.dash')}}">Dashboard</a>
     <a href="{{ route('blog') }}">Blogs</a>
-    <a href="{{ route('categories') }}">Main Catagory</a>
-    <a href="{{route('admin.dash')}}">Sub Catagory</a>
+    <a href="{{ route('categories') }}">Catagories</a>
     <a href="{{route('admin.dash')}}">Comments</a>
     <a href="{{route('admin.dash')}}">Settings</a>
     <a href="{{route("logout")}}">Logout</a>

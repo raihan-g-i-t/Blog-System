@@ -48,7 +48,10 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::group(['prefix' => 'blog'],function(){
             Route::get('/',[BlogController::class, 'index'])->name('blog');
-            Route::post('/',[BlogController::class, 'store'])->name('blog.store');
+            Route::get('/add',[BlogController::class, 'create'])->name('blog.create');
+            Route::post('/add',[BlogController::class, 'store'])->name('blog.store');
+            Route::get('/edit/{id}',[BlogController::class, 'edit'])->name('blog.edit');
+            Route::get('/delete/{id}',[BlogController::class, 'delete'])->name('blog.delete');
         });
         
         Route::get('/admin_dashboard',[AdminLoginController::class,'adminDash'])->name('admin.dash');
