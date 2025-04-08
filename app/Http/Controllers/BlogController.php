@@ -34,7 +34,7 @@ class BlogController extends Controller
     }
     
     public function create(){        
-        $categories = Category::get();
+        $categories = Category::where('status', STATUS_ACTIVE)->get();
         return view('admin.add-blog')->with('categories', $categories);
     }
 
@@ -44,6 +44,7 @@ class BlogController extends Controller
         Blog::create([
             'title' => $request->title,
             'status' => $request->status,
+            'content' => $request->content,
             'category_id' => $request->category_id,
             'image' => $imagePath
         ]);
@@ -61,5 +62,17 @@ class BlogController extends Controller
         $blog->delete();
 
         return redirect()->route('blog')->with('success','Blog Deleted Successful');
+    }
+
+    public function show(){
+        $blog = Blog::all();
+
+        return view('index')->with('blogs', $blog);
+    }
+
+    public function blog($id){
+        $blog = Blog::findOrFail($id);
+
+        return view('blogs', compact('blog'));
     }
 }

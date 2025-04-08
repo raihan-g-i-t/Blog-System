@@ -25,6 +25,7 @@ class BlogCreateRequest extends FormRequest
             'title' => 'required',
             'image' => 'required',
             'status' => 'required',
+            'content' => 'required|string',
             'category_id' => 'required'
         ];
     }

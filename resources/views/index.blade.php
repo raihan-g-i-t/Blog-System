@@ -49,7 +49,17 @@
     <section class="slider-section">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                
+            @foreach($blogs as $slide)
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <img src="{{ asset('storage/'. $slide->image) }}" alt="{{ $slide->title }}">
+                        <div class="slide-text">
+                            <h2>{{ $slide->title }}</h2>
+                            <p>{{ $slide->content }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
@@ -61,7 +71,13 @@
     <section id="blogs" class="blog-section">
         <h2>Latest Blogs</h2>
         <div class="blog-container">
-            
+        @foreach($blogs as $blog)
+            <div class="blog-card">
+                <h3>{{ $blog->title }}</h3>
+                <p>{{ Str::limit($blog->content, 100) }}</p>
+                <a href="{{ route('show.blog', $blog->id) }}">Read More</a>
+            </div>
+            @endforeach
         </div>
     </section>
 
@@ -73,6 +89,10 @@
     <script>
         var swiper = new Swiper(".mySwiper", {
             loop: true,
+            autoplay: {
+                delay: 2000, // Change slide every 3 seconds
+                disableOnInteraction: false, // Keep autoplay even after user interaction
+            },
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -81,10 +101,6 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
-        });
-
-        document.getElementById("profile-icon")?.addEventListener("click", function() {
-            document.getElementById("profile-dropdown").classList.toggle("hidden");
         });
     </script>
 </body>

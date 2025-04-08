@@ -142,9 +142,11 @@ body {
 }
 
 .slide-content img {
-    width: 50%;
-    height: auto;
     border-radius: 10px;
+    width: 400px;  /* Full width of the container */
+    max-height: fit-content;
+    /* height: 300px; Fixed height */
+    border-radius: 10px; /* Optional for rounded corners */
 }
 
 .slide-text {
@@ -185,4 +187,10 @@ body {
     color: white;
     text-align: center;
     padding: 20px;
+}
+
+.blog-content-wrapper img {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
 }

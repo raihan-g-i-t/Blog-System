@@ -6,7 +6,8 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\UserLoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'index')->name('index');
+// Route::view('/', 'index')->name('index');
+Route::get('/', [BlogController::class,'show'])->name('index');
 
 Route::group(['prefix' => 'account'], function(){
 
@@ -16,6 +17,7 @@ Route::group(['prefix' => 'account'], function(){
         Route::post('/login',[UserLoginController::class,'userLoginValidate'])->name('user.login.validate');
         Route::get('/registration',[UserLoginController::class, 'register'])->name('user.registration');
         Route::post('/registration',[UserLoginController::class, 'registerStore']);
+        Route::get('/blogs/{id}',[BlogController::class, 'blog'])->name('show.blog');
     });
     
     Route::group(['middleware' => 'auth'], function(){
