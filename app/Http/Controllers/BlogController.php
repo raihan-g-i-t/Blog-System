@@ -71,8 +71,9 @@ class BlogController extends Controller
     }
 
     public function blog($id){
-        $blog = Blog::findOrFail($id);
+        $blogs = Blog::findOrFail($id);
+        $all = Blog::all()->except($id);
 
-        return view('blogs', compact('blog'));
+        return view('blogs', compact('blogs', 'all'));
     }
 }
