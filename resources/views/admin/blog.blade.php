@@ -40,22 +40,6 @@ Blogs
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ]
         });
-
-        // Delete Function
-        // $(document).on('click', '.delete-btn', function() {
-        //     var blogId = $(this).data('id');
-        //     if (confirm('Are you sure you want to delete this blog?')) {
-        //         $.ajax({
-        //             url: "/blogs/" + blogId,
-        //             type: 'DELETE',
-        //             data: { _token: "{{ csrf_token() }}" },
-        //             success: function(response) {
-        //                 $('#blogTable').DataTable().ajax.reload();
-        //                 alert(response.success);
-        //             }
-        //         });
-        //     }
-        // });
     });
 </script>
 @endsection

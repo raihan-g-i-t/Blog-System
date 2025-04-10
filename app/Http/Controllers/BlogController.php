@@ -64,15 +64,9 @@ class BlogController extends Controller
         return redirect()->route('blog')->with('success','Blog Deleted Successful');
     }
 
-    public function show(){
-        $blog = Blog::all();
-
-        return view('index')->with('blogs', $blog);
-    }
-
     public function blog($id){
         $blogs = Blog::findOrFail($id);
-        $all = Blog::all()->except($id);
+        $all = Blog::where('category_id', $blogs->category_id)->get()->except($id);
 
         return view('blogs', compact('blogs', 'all'));
     }

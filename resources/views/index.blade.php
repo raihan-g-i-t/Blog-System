@@ -49,7 +49,7 @@
     <section class="slider-section">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-            @foreach($blogs as $slide)
+            @foreach($data['allBlogs'] as $slide)
                 <div class="swiper-slide">
                     <div class="slide-content">
                         <img src="{{ asset('storage/'. $slide->image) }}" alt="{{ $slide->title }}">
@@ -71,7 +71,7 @@
     <section id="blogs" class="blog-section">
         <h2>Latest Blogs</h2>
         <div class="blog-container">
-        @foreach($blogs as $blog)
+        @foreach($data['latestBlogs'] as $blog)
             <div class="blog-card">
                 <h3>{{ $blog->title }}</h3>
                 <p>{{ Str::limit($blog->content, 100) }}</p>

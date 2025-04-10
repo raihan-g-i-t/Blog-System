@@ -3,11 +3,12 @@
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserLoginController;
 use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'index')->name('index');
-Route::get('/', [BlogController::class,'show'])->name('index');
+Route::get('/', [LandingController::class,'index'])->name('index');
 
 Route::group(['prefix' => 'account'], function(){
 

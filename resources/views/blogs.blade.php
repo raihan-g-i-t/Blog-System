@@ -29,7 +29,7 @@
                             <h5 class="card-title text-dark">{{ $related->title }}</h5>
                             <span class="badge bg-secondary">{{ $related->category->title }}</span>
                             <p class="text-muted mt-2">{{ Str::limit($related->content, 100) }}</p>
-                            <a href="{{ route('blog', $related->id) }}" class="btn btn-primary btn-sm">Read More</a>
+                            <a href="{{ route('show.blog', $related->id) }}" class="btn btn-primary btn-sm">Read More</a>
                         </div>
                     </div>
                 </div>
