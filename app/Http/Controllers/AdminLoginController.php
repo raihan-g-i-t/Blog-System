@@ -7,13 +7,13 @@ use App\Http\Requests\RegistrationValidateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\services\loginService;
+use App\Services\LoginService;
 
 class AdminLoginController extends Controller
 {
     private $loginService;
     public function __construct(){
-        $this->loginService = new loginService;
+        $this->loginService = new LoginService;
     }
 
     public function login_validate(LoginValidateRequest $request){

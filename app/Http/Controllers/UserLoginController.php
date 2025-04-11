@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginValidateRequest;
-use App\services\userLoginService;
+use App\Services\UserLoginService;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationValidateRequest;
 use App\services\loginService;
@@ -14,7 +14,7 @@ class UserLoginController extends Controller
 {
     private $loginService;
     public function __construct(){
-        $this->loginService = new userLoginService();
+        $this->loginService = new UserLoginService();
     }
     public function userDashboard(){
         return view('user.dash');
@@ -26,7 +26,7 @@ class UserLoginController extends Controller
 
         $this->loginService->userRegistration($request);
         
-        return redirect()->route('login', )->with('success', 'Registration Successful');
+        return redirect()->route('user.login', )->with('success', 'Registration Successful');
     }
 
     public function userLoginValidate(LoginValidateRequest $request){

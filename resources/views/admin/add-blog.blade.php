@@ -9,7 +9,7 @@ Add Blogs
 @section('content')
 
 <div class="container">
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Title -->
         <div class="mb-3">

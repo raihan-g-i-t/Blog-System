@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\services\landingService;
+use App\Services\LandingService;
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -10,7 +10,7 @@ class LandingController extends Controller
     private $blog;
 
     public function __construct(){
-        $this->blog = new landingService;
+        $this->blog = new LandingService;
     }
     public function index(){
         $allBlogs = $this->blog->getAllBlogs();

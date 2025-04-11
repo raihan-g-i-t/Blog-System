@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogCreateRequest;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Services\LandingService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class BlogController extends Controller
 {
+
+    private $landing;
+
+    public function __construct(){
+        $this->landing = new LandingService;
+    }
     public function index(Request $request){
         if ($request->ajax()) {
-            $data = Blog::select(['id', 'title', 'image', 'status']);
+            $data = Blog::join('categories', 'blogs.category_id', '=', 'categories.id')
+                    ->where('categories.status', STATUS_ACTIVE)
+                    ->select('blogs.*');       
             return DataTables::of($data)
                 ->addColumn('image', function ($row) {
                     return '<img src="'.asset('storage/' . $row->image).'" width="50">';
@@ -26,7 +35,10 @@ class BlogController extends Controller
                         ? 'Active'
                         : 'Inactive';
                 })
-                ->rawColumns(['image', 'actions', 'status'])
+                ->addColumn('category_id', function ($row) {
+                    return $row->category->title;
+                })
+                ->rawColumns(['image', 'actions', 'status','category_id'])
                 ->make(true);
         }
 
@@ -39,6 +51,7 @@ class BlogController extends Controller
     }
 
     public function store(BlogCreateRequest $request){
+
         $imagePath = $request->file('image')->store('uploads', 'public');
         
         Blog::create([
@@ -53,7 +66,31 @@ class BlogController extends Controller
     }
 
     public function edit($id){
-        echo $id;
+
+        $blog = Blog::find($id);
+        $categories = Category::where('status', STATUS_ACTIVE)->get();
+        return view('admin.edit-blog', ['blog' => $blog, 'categories' => $categories]);
+        
+    }
+
+    public function editStore(Request $request, $id){
+
+        if($request->hasFile('image')){
+            $imagePath = $request->file('image')->store('uploads', 'public');
+        }else{
+            $imagePath = $request->oldImage;
+        }
+
+        $blog = Blog::find($id);
+        $blog->update([
+            'title'=> $request->title,
+            'status' => $request->status,
+            'content' => $request->content,
+            'category_id' => $request->category_id,
+            'image' => $imagePath
+        ]);
+
+        return redirect()->route('blog')->with('success','Blog Updated Successfull');
     }
     
     public function delete($id){

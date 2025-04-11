@@ -21,6 +21,7 @@ Blogs
                 <th>Image</th>
                 <th>Title</th>
                 <th>Status</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,6 +38,7 @@ Blogs
                 { data: 'image', name: 'image', orderable: false, searchable: false },
                 { data: 'title', name: 'title' },
                 { data: 'status', name: 'status' },
+                { data: 'category_id', name: 'category_id'},
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ]
         });
