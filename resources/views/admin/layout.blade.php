@@ -16,6 +16,7 @@
   <div class="sidebar">
     <h2>Admin Panel</h2>
     <a href="{{route('admin.dash')}}">Dashboard</a>
+    <a href="{{route('display.users')}}">User List</a>
     <a href="{{ route('blog') }}">Blogs</a>
     <a href="{{ route('categories') }}">Catagories</a>
     <a href="{{route('admin.dash')}}">Comments</a>
@@ -36,5 +37,7 @@
     @endif
 
   </div>
+
+  @stack('scripts')
 </body>
 </html>

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Services\LoginService;
+use Yajra\DataTables\DataTables;
+use App\Models\User;
 
 class AdminLoginController extends Controller
 {

@@ -4,7 +4,7 @@ use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\UserLoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'index')->name('index');
@@ -15,16 +15,16 @@ Route::group(['prefix' => 'account'], function(){
     Route::group(['middleware' => 'guest'], function(){
 
         Route::view('/login','user.login')->name('user.login');
-        Route::post('/login',[UserLoginController::class,'userLoginValidate'])->name('user.login.validate');
-        Route::get('/registration',[UserLoginController::class, 'register'])->name('user.registration');
-        Route::post('/registration',[UserLoginController::class, 'registerStore']);
+        Route::post('/login',[UserController::class,'userLoginValidate'])->name('user.login.validate');
+        Route::get('/registration',[UserController::class, 'register'])->name('user.registration');
+        Route::post('/registration',[UserController::class, 'registerStore']);
         Route::get('/blogs/{id}',[BlogController::class, 'blog'])->name('show.blog');
     });
     
     Route::group(['middleware' => 'auth'], function(){
 
-        Route::get('/logout',[UserLoginController::class,'logout'])->name('user.logout');
-        Route::get('/user_dashboard',[UserLoginController::class,'userDashboard'])->name('user.profile');
+        Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
+        Route::get('/user_dashboard',[UserController::class,'userDashboard'])->name('user.profile');
     });
 });
 
@@ -59,6 +59,9 @@ Route::group(['prefix' => 'admin'], function(){
         });
         
         Route::get('/admin_dashboard',[AdminLoginController::class,'adminDash'])->name('admin.dash');
+        Route::get('/admin/user',[UserController::class,'userList'])->name('user.list');
+        Route::get('/admin/users',[UserController::class,'displayUsers'])->name('display.users');
+        Route::get('/admin/user/delete/{id}',[UserController::class,'deleteUser'])->name('delete.user');
         Route::get('/logout',[AdminLoginController::class,'logout'])->name('logout');
     });
 });
