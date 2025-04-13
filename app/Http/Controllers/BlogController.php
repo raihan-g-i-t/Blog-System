@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogCreateRequest;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Services\LandingService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -104,7 +105,25 @@ class BlogController extends Controller
     public function blog($id){
         $blogs = Blog::findOrFail($id);
         $all = Blog::where('category_id', $blogs->category_id)->get()->except($id);
+        $comments = Comment::where('blog_id', $id)->get();
 
-        return view('blogs', compact('blogs', 'all'));
+        return view('specific-blogs', compact('blogs', 'all', 'comments'));
+    }
+
+    public function allBlogs(){
+        $blog = Blog::all();
+        return view('all-blogs', ['blogs' => $blog]);
+    }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+
+        $blogs = Blog::join('categories', 'blogs.category_id', '=', 'categories.id')
+                ->where('blogs.title', 'like', "%$query%")
+                ->orWhere('blogs.content', 'like', "%$query%")
+                ->orWhere('categories.title', 'like', "%$query%")
+                ->get();
+
+        return view('all-blogs', compact('blogs', 'query'));
     }
 }

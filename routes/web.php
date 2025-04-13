@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,15 @@ Route::group(['prefix' => 'account'], function(){
         Route::get('/registration',[UserController::class, 'register'])->name('user.registration');
         Route::post('/registration',[UserController::class, 'registerStore']);
         Route::get('/blogs/{id}',[BlogController::class, 'blog'])->name('show.blog');
+        Route::get('/all/blogs',[BlogController::class, 'allBlogs'])->name('all.blogs');
+        Route::get('/search',[BlogController::class, 'search'])->name('search');
     });
     
     Route::group(['middleware' => 'auth'], function(){
-
+        
+        Route::post('/comment', [CommentController::class, 'commentStore'])->name('comment.store');
         Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
-        Route::get('/user_dashboard',[UserController::class,'userDashboard'])->name('user.profile');
+        Route::get('/dashboard',[UserController::class,'userDashboard'])->name('user.profile');
     });
 });
 
