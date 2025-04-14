@@ -4,10 +4,11 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1>Discover & Share Amazing Stories</h1>
-            <p>Join our community of writers and readers. Explore thought-provoking articles on technology, lifestyle, business and more.</p>
-
+        <div class="text-background">
+            <div class="container">
+                <h1>Discover & Share Amazing Stories</h1>
+                <p>Join our community of writers and readers. Explore thought-provoking articles on technology, lifestyle, business and more.</p>
+            </div>
         </div>
     </section>
 
