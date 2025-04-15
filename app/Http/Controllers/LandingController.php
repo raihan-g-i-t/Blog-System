@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\LandingService;
-use Illuminate\Http\Request;
+use App\Services\BlogService;
 
 class LandingController extends Controller
 {
     private $blog;
 
     public function __construct(){
-        $this->blog = new LandingService;
+        $this->blog = new BlogService;
     }
     public function index(){
-        $allBlogs = $this->blog->getAllBlogs();
+        $allBlogs = $this->blog->getActiveBlogs();
         $latestBlogs = $this->blog->latestBlogs();
 
         $data = compact('allBlogs', 'latestBlogs');

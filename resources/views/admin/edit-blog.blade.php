@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layouts.admin')
 
 @section('heading')
 Edit Blog
@@ -51,7 +51,7 @@ Edit Blog
             <textarea class="form-control" id="content" name="content" rows="4" required> {{ old('content',$blog->content) }} </textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </form>
 </div>
 

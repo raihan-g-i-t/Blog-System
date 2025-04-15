@@ -3,32 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryCreateRequest;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Yajra\DataTables\DataTables;
+use function PHPUnit\Framework\returnArgument;
 
 class CategoriesController extends Controller
 {
+    private $category;
+
+    public function __construct(){
+        $this->category = new CategoryService;
+    }
     public function categories(){
         return view('admin.categories');
     }
     public function getData(Request $request){
-        if ($request->ajax()) {
-            $data = Category::select(['id', 'title', 'status']);
-            return DataTables::of($data)
-            ->addColumn('status', function ($category) {
-                return $category->status
-                    ? 'Active'
-                    : 'Inactive';
-            })
-            ->addColumn('action', function ($category) {
-                return '
-                    <a href="'.route('edit.category', $category->id).'" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="'.route('delete.category', $category->id).'" class="btn btn-danger btn-sm delete-btn">Delete</button>
-                ';
-            })
-            ->rawColumns(['action', 'status'])
-            ->make(true);
+        if ($request->ajax()){
+            return $this->category->adminCategoryList();
         }
     }
 
@@ -37,38 +29,31 @@ class CategoriesController extends Controller
     }
 
     public function saveCategory(CategoryCreateRequest $request){
-        
-        Category::create([
-            'title' => $request->title,
-            'status' => $request->status,
-        ]);
+        Category::create($this->category->create($request));
 
         return redirect()->route('categories')->with('success', 'Category added Successful');
     }
 
     public function editCategory($id){
-        $category = Category::findOrFail($id);
-        
-        return view('admin.add-category', 
-        ['data' => $category, 'heading' => 'Edit Category', 'button' => 'Save', 'url' => 'editCategory.store']);
+        $specific = $this->category->findCategory($id);
+
+        $heading = 'Edit Category';
+        $button = 'Save';
+        $url = 'editCategory.store';
+
+        $data = compact( 'specific', 'heading', 'button', 'url');
+        return view('admin.add-category', ['data' => $data]);
     }
 
     public function editCategoryStore(CategoryCreateRequest $request, $id){
-
-        $category = Category::findOrFail($id);
-
-        $category->update([
-            'title' => $request->title,
-            'status' => $request->status
-        ]);
+        $this->category->findCategory($id)
+                ->update($this->category->create($request));
 
         return redirect()->route('categories')->with('success', 'Category updated Successful');
     }
 
     public function deleteCategory($id){
-
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $this->category->findCategory($id)->delete();
 
         return redirect()->route('categories')->with('success', 'Category deleted Successful');
     }

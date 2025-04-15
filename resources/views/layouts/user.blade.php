@@ -21,7 +21,6 @@
                 <div class="nav-links">
                     <a href="{{ route('index') }}">Home</a>
                     <a href="{{ route('all.blogs') }}">Blogs</a>
-                    <a href="#">Categories</a>
                 </div>
                 
                 <!-- Change this part based on login state -->
@@ -66,30 +65,30 @@
                 <div class="footer-column">
                     <h3>Explore</h3>
                     <ul>
-                        <li><a href="#">Popular Blogs</a></li>
+                        <!-- <li><a href="#">Popular Blogs</a></li>
                         <li><a href="#">Top Writers</a></li>
                         <li><a href="#">Categories</a></li>
-                        <li><a href="#">Trending Topics</a></li>
+                        <li><a href="#">Trending Topics</a></li> -->
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <!-- <li><a href="#">About Us</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Terms of Service</a></li> -->
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Support</h3>
                     <ul>
-                        <li><a href="#">Help Center</a></li>
+                        <!-- <li><a href="#">Help Center</a></li>
                         <li><a href="#">Community</a></li>
                         <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Feedback</a></li>
+                        <li><a href="#">Feedback</a></li> -->
                     </ul>
                 </div>
             </div>

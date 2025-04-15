@@ -8,7 +8,6 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Route::view('/', 'index')->name('index');
 Route::get('/', [LandingController::class,'index'])->name('index');
 
 Route::group(['prefix' => 'account'], function(){

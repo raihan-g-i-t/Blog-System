@@ -18,7 +18,7 @@
         </div>
 
         <div class="blog-body">
-            {!! $blogs->content !!}
+            {{ $blogs->content }}
         </div>
     </article>
 
