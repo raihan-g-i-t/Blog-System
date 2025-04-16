@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CommentController;
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::group(['middleware' => 'admin.guest'], function(){
         
         Route::view('/login','login')->name('login');
-        Route::post('/login',[AdminLoginController::class,'login_validate'])->name('admin.login.validate');
+        Route::post('/login',[AdminController::class,'login_validate'])->name('admin.login.validate');
     });
     
     Route::group(['middleware' => 'admin.auth'], function(){
@@ -61,10 +61,10 @@ Route::group(['prefix' => 'admin'], function(){
             Route::get('/delete/{id}',[BlogController::class, 'delete'])->name('blog.delete');
         });
         
-        Route::get('/admin_dashboard',[AdminLoginController::class,'adminDash'])->name('admin.dash');
+        Route::get('/admin_dashboard',[AdminController::class,'adminDash'])->name('admin.dash');
         Route::get('/admin/user',[UserController::class,'userList'])->name('user.list');
         Route::get('/admin/users',[UserController::class,'displayUsers'])->name('display.users');
         Route::get('/admin/user/delete/{id}',[UserController::class,'deleteUser'])->name('delete.user');
-        Route::get('/logout',[AdminLoginController::class,'logout'])->name('logout');
+        Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     });
 });

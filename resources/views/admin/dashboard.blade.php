@@ -5,58 +5,96 @@ Welcome, Admin
 @endsection
 
 @section('content')
-<!-- Statistics Section -->
-
-@for ($i=1; $i<6; $i++)
-  <div class="stats">
-      <div class="card">
-        <h3>Users</h3>
-        <p>1,200</p>
-      </div>
-      <div class="card">
-        <h3>Sales</h3>
-        <p>$25,000</p>
-      </div>
-      <div class="card">
-        <h3>Visitors</h3>
-        <p>3,500</p>
-      </div>
-  </div>
-@endfor
-
-<!-- Table Section -->
-<div class="table-section">
-      <h2>Recent Activities</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Activity</th>
-            <th>Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>User Login</td>
-            <td>2024-11-27</td>
-            <td>Success</td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Payment Received</td>
-            <td>2024-11-26</td>
-            <td>Completed</td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Report Generated</td>
-            <td>2024-11-25</td>
-            <td>Pending</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome back, {{ auth()->user()->name }}</p>
     </div>
-@endsection
 
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <!-- Users Card -->
+        <div class="stats-card">
+            <div class="stats-icon" style="background: #4361ee20; color: #4361ee;">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stats-info">
+                <h3>{{ $data['totalUsers'] }}</h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+
+        <!-- Blogs Card -->
+        <div class="stats-card">
+            <div class="stats-icon" style="background: #3a0ca320; color: #3a0ca3;">
+                <i class="fas fa-blog"></i>
+            </div>
+            <div class="stats-info">
+                <h3>{{ $data['totalBlogs'] }}</h3>
+                <p>Total Blogs</p>
+            </div>
+        </div>
+
+        <!-- Categories Card -->
+        <div class="stats-card">
+            <div class="stats-icon" style="background: #7209b720; color: #7209b7;">
+                <i class="fas fa-tags"></i>
+            </div>
+            <div class="stats-info">
+                <h3>{{ $data['totalCategory'] }}</h3>
+                <p>Total Categories</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="dashboard-section">
+        <div class="section-column">
+            <h2>Recent Users</h2>
+            <div class="activity-card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Joined</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data['latestUsers'] as $user)
+                        <tr>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-column">
+            <h2>Recent Blogs</h2>
+            <div class="activity-card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Posted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data['latestBlogs'] as $blog)
+                        <tr>
+                            <td>{{ Str::limit($blog->title, 30) }}</td>
+                            <td>{{ $blog->created_at->diffForHumans() }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

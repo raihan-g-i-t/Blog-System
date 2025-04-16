@@ -42,7 +42,7 @@ class BlogService{
     public function latestBlogs(){
         return Blog::orderBy('created_at', 'desc')
                     ->where('status', STATUS_ACTIVE)
-                    ->take(3)->get();
+                    ->take(LATEST_NUMBER_COUNT)->get();
     }
 
     public function create($data, $image){

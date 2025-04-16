@@ -5,3 +5,5 @@ Const USER =1;
 
 Const STATUS_ACTIVE =1;
 Const STATUS_INACTIVE =0;
+
+Const LATEST_NUMBER_COUNT = 3;

@@ -7,20 +7,20 @@ use App\Http\Requests\RegistrationValidateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Services\LoginService;
+use App\Services\AdminService;
 use Yajra\DataTables\DataTables;
 use App\Models\User;
 
-class AdminLoginController extends Controller
+class AdminController extends Controller
 {
-    private $loginService;
-    public function __construct(){
-        $this->loginService = new LoginService;
+    private $admin;
+    public function __construct(AdminService $adminService){
+        $this->admin = $adminService;
     }
 
     public function login_validate(LoginValidateRequest $request){
         
-        if($this->loginService->userLoginValidate($request->only('email', 'password'))){
+        if($this->admin->userLoginValidate($request->only('email', 'password'))){
             if(Auth::guard('admin')->user()->role == ADMIN){
                 return redirect()->route('admin.dash');
             }else{
@@ -39,6 +39,7 @@ class AdminLoginController extends Controller
     }
 
     public function adminDash(){
-        return view('admin.dashboard');
+        $data = $this->admin->forDashboard();
+        return view('admin.dashboard', ['data' => $data]);
     }
 }

@@ -1,59 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
-    <link rel="stylesheet" href="{{asset('css/user/registration.css')}}">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    
-</head>
-<body>
-    <div class="registration-container">
-        <h1>Create Account</h1>
+@extends('layouts.guest')
 
-<!-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif -->
+@section('content')
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <a href="{{ route('index') }}" class="auth-logo">
+                <i class="fas fa-blog"></i>
+                Blog System
+            </a>
+            <h1>Create your account</h1>
+            <p>Join our community of writers and readers</p>
+        </div>
 
-        <form action="" method="POST" id="demo-form">
+        <form method="POST" action="" class="auth-form" id="demo-form">
             @csrf
 
-            <div class="input-group">
-                <label for="full-name">Full Name</label>
-                <input type="text" id="full-name" name="name" placeholder="Enter your full name" value="{{ old('name') }}" required>
+            <!-- Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input 
+                    id="name" 
+                    type="text" 
+                    name="name" 
+                    value="{{ old('name') }}" 
+                    required 
+                    autofocus 
+                    autocomplete="name"
+                    placeholder="Enter your full name"
+                >
+                @error('name')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
             </div>
-            @error('name')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-            <div class="input-group">
+
+            <!-- Email -->
+            <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" value="{{ old('email') }}" required>
+                <input 
+                    id="email" 
+                    type="email" 
+                    name="email" 
+                    value="{{ old('email') }}" 
+                    required 
+                    autocomplete="email"
+                    placeholder="Enter your email"
+                >
+                @error('email')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
             </div>
-            @error('email')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-            <!-- <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Choose a username" required>
-            </div> -->
-            <div class="input-group">
+
+            <!-- Password -->
+            <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <input 
+                    id="password" 
+                    type="password" 
+                    name="password" 
+                    required 
+                    autocomplete="new-password"
+                    placeholder="Create a password"
+                >
+                @error('password')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
             </div>
-            @error('password')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-            <!-- <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-            </div> -->
+
+            <!-- Submit Button -->
+            <!-- <button type="submit" class="auth-button">
+                Sign Up
+            </button> -->
+
             @error('g-recaptcha-response')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
@@ -62,21 +79,15 @@
                     data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}" 
                     data-callback='onSubmit' 
                     data-action='submit'>Register</button>
+
+            <!-- Login Redirect -->
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ route('user.login') }}">Sign in</a></p>
+            </div>
         </form>
-        <div class="footer">
-            <p>Already have an account? <a href="{{route("login")}}">Log in</a></p>
-        </div>
     </div>
+</div>
 
-    @if(session('success'))
-        @include('user.modal');
-    @endif
 
-<script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-    
-</body>
-</html>
+
+@endsection

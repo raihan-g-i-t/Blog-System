@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlogHub - Modern Blogging Platform</title>
+    <title>Blog System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/landing2.css') }}"
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}"
 
 </head>
 <body>
@@ -22,16 +22,12 @@
                     <a href="{{ route('index') }}">Home</a>
                     <a href="{{ route('all.blogs') }}">Blogs</a>
                 </div>
-                
-                <!-- Change this part based on login state -->
 
                 @guest
                 <div class="auth-buttons" id="authSection">
-                    <!-- Default state (not logged in) -->
                     <a href="{{ route('user.login') }}" class="btn btn-outline">Sign In</a>
                     <a href="{{ route('user.registration') }}" class="btn btn-primary">Sign Up</a>
                 @else    
-                    <!-- Logged in state (comment out the above and uncomment below) -->
                     <div class="profile-icon">
                        <a href="{{ route('user.profile') }}"> <img src="{{ asset('css/profile.png') }}"> </a>
                     </div>
