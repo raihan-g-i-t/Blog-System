@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginValidateRequest;
+use App\Http\Requests\PasswordEditRequest;
+use App\Http\Requests\UserEditStoreRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationValidateRequest;
 use Illuminate\Support\Facades\Auth;
+use Password;
 
 class UserController extends Controller
 {
@@ -15,6 +19,7 @@ class UserController extends Controller
         $this->userService = new UserService();
     }
     public function userDashboard(){
+
         return view('user.dash');
     }
     public function register(){
@@ -51,6 +56,27 @@ class UserController extends Controller
 
     public function userList(){
         return $this->userService->userList();
+    }
+
+    public function userEdit(){
+        return view('user.edit-user');
+    }
+    public function userEditStore(UserEditStoreRequest $request){
+        $this->userService->editStore($request);
+
+        return redirect()->route('user.profile')->with('success', 'Update Successful');
+    }
+
+    public function editPassword(){
+        return view('user.edit-password');
+    }
+    public function editPasswordStore(PasswordEditRequest $request){
+        $result = $this->userService->passwordStore($request);
+        if($result == true){
+            return redirect()->route('user.profile')->with('success', 'Update Successful');
+        }else{
+            return redirect()->back()->with('success', 'Current Password is Wrong');
+        }
     }
 
     public function deleteUser($id){

@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
+
 <div class="auth-container">
     <div class="auth-card">
         <div class="auth-header">
@@ -12,7 +13,7 @@
             <p>Join our community of writers and readers</p>
         </div>
 
-        <form method="POST" action="" class="auth-form" id="demo-form">
+        <form method="POST" action="{{ route('user.store') }}" class="auth-form" id="demo-form">
             @csrf
 
             <!-- Name -->
@@ -66,19 +67,14 @@
                 @enderror
             </div>
 
-            <!-- Submit Button -->
-            <!-- <button type="submit" class="auth-button">
-                Sign Up
-            </button> -->
-
             @error('g-recaptcha-response')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
 
             <button class="g-recaptcha" 
-                    data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}" 
-                    data-callback='onSubmit' 
-                    data-action='submit'>Register</button>
+                data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}" 
+                data-callback='onSubmit' 
+                data-action='submit'>Register</button>
 
             <!-- Login Redirect -->
             <div class="auth-footer">
@@ -87,7 +83,5 @@
         </form>
     </div>
 </div>
-
-
 
 @endsection

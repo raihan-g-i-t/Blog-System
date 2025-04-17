@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/landing.css') }}"
+    <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
 
 </head>
 <body>
@@ -30,9 +30,15 @@
                 @else    
                     <div class="profile-icon">
                        <a href="{{ route('user.profile') }}"> <img src="{{ asset('css/profile.png') }}"> </a>
+
+                            <select id="selectField" class="custom-select">
+                                <option disabled selected>{{ auth()->user()->name }}</option>
+                                <option value="{{ route('user.profile') }}">Profile</option>
+                                <option value="{{ route('user.logout') }}">Logout</option>
+                            </select>
                     </div>
                 @endguest
-                </div>
+                </>
             </div>
         </div>
     </nav>
@@ -94,6 +100,15 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    document.getElementById('selectField').addEventListener('change', function () {
+        const url = this.value;
+        if (url) {
+            window.location.href = url;
+        }
+    });
+</script>
 
 </body>
 </html>

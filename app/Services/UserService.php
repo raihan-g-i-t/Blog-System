@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
 
 class UserService{
@@ -13,11 +14,10 @@ class UserService{
         return Auth::attempt($data);
     }
     public function userRegistration($data){
-        DB::table('users')->insert([
+        User::create([
             'name' => $data->name,
             'email' => $data->email,
-            'password' => bcrypt($data->password)
-
+            'password' => Hash::make($data->password)
         ]);
     }
 
@@ -36,5 +36,27 @@ class UserService{
         $user = User::find($data);
         $user->delete();
         return true;
+    }
+
+    public function editStore($data){
+        $user = User::find(Auth::user()->id);
+
+        $user->update([
+            'name' => $data->name,
+            'email' => $data->email
+        ]);
+    }
+
+    public function passwordStore($data){
+        $user = User::find(Auth::user()->id);
+        
+        if(Hash::check($data->current, $user->password)){
+            $user->update([
+                'password' => Hash::make($data->new)
+            ]);
+            return true;
+        }else{
+            return false;
+        }
     }
 }

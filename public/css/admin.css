@@ -216,7 +216,7 @@
 .admin-table th {
   text-align: left;
   padding: 12px 15px;
-  background: var(--light-gray);
+  background: black;
   font-weight: 500;
 }
 

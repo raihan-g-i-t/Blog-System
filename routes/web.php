@@ -14,10 +14,10 @@ Route::group(['prefix' => 'account'], function(){
 
     Route::group(['middleware' => 'guest'], function(){
 
-        Route::view('/login','user.login')->name('user.login');
+        Route::view('/login','login')->name('user.login');
         Route::post('/login',[UserController::class,'userLoginValidate'])->name('user.login.validate');
         Route::get('/registration',[UserController::class, 'register'])->name('user.registration');
-        Route::post('/registration',[UserController::class, 'registerStore']);
+        Route::post('/registration',[UserController::class, 'registerStore'])->name('user.store');
         Route::get('/blogs/{id}',[BlogController::class, 'blog'])->name('show.blog');
         Route::get('/all/blogs',[BlogController::class, 'allBlogs'])->name('all.blogs');
         Route::get('/search',[BlogController::class, 'search'])->name('search');
@@ -27,6 +27,10 @@ Route::group(['prefix' => 'account'], function(){
         
         Route::post('/comment', [CommentController::class, 'commentStore'])->name('comment.store');
         Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
+        Route::get('/edit',[UserController::class,'userEdit'])->name('user.edit');
+        Route::post('/edit',[UserController::class,'userEditStore'])->name('user.edit.store');
+        Route::get('/edit/password',[UserController::class,'editPassword'])->name('edit.password');
+        Route::post('/edit/password',[UserController::class,'editPasswordStore'])->name('edit.password.store');
         Route::get('/dashboard',[UserController::class,'userDashboard'])->name('user.profile');
     });
 });

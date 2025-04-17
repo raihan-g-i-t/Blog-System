@@ -66,6 +66,7 @@ Welcome, Admin
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->created_at->diffForHumans() }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -80,7 +81,6 @@ Welcome, Admin
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Author</th>
                             <th>Posted</th>
                         </tr>
                     </thead>
