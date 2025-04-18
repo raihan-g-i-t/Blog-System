@@ -8,16 +8,19 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Services\BlogService;
 use App\Services\CategoryService;
+use App\Services\CommentService;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     private $blog;
     private $category;
+    private $comment;
 
     public function __construct(){
         $this->blog = new BlogService;
         $this->category = new CategoryService;
+        $this->comment = new CommentService;
     }
     public function index(Request $request){
         if ($request->ajax()) {
@@ -67,8 +70,9 @@ class BlogController extends Controller
 
     public function blog($id){
         $blogs = $this->blog->findBlog($id);
-        $all = Blog::where('category_id', $blogs->category_id)->get()->except($id);
-        $comments = Comment::where('blog_id', $id)->get();
+
+        $all = $this->blog->relatedBlogs($blogs, $id);
+        $comments = $this->comment->activeComments($id);
 
         return view('specific-blogs', compact('blogs', 'all', 'comments'));
     }
@@ -80,12 +84,7 @@ class BlogController extends Controller
 
     public function search(Request $request){
         $query = $request->input('query');
-
-        $blogs = Blog::join('categories', 'blogs.category_id', '=', 'categories.id')
-                ->where('blogs.title', 'like', "%$query%")
-                ->orWhere('blogs.content', 'like', "%$query%")
-                ->orWhere('categories.title', 'like', "%$query%")
-                ->get();
+        $blogs = $this->blog->search($query);
 
         return view('all-blogs', compact('blogs', 'query'));
     }

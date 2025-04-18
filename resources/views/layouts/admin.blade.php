@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+  <link rel="stylesheet" href="{{asset('css/landing.css')}}">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,8 +20,8 @@
     <a href="{{route('display.users')}}">User List</a>
     <a href="{{ route('blog') }}">Blogs</a>
     <a href="{{ route('categories') }}">Catagories</a>
-    <a href="{{route('admin.dash')}}">Comments</a>
-    <a href="{{route('admin.dash')}}">Settings</a>
+    <a href="{{route('admin.comment')}}">Comments</a>
+    <a href="{{route('admin.settings')}}">Settings</a>
     <a href="{{route("logout")}}">Logout</a>
   </div>
 

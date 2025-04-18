@@ -55,4 +55,17 @@ class BlogService{
         ];
     }
 
+    public function search($query){
+        return Blog::join('categories', 'blogs.category_id', '=', 'categories.id')
+                ->where('blogs.title', 'like', "%$query%")
+                ->orWhere('blogs.content', 'like', "%$query%")
+                ->orWhere('categories.title', 'like', "%$query%")
+                ->select('blogs.*')
+                ->get();
+    }
+
+    public function relatedBlogs($categoryId, $blogId){
+        return Blog::where('category_id', $categoryId->category_id)->get()->except($blogId);
+    }
+
 }

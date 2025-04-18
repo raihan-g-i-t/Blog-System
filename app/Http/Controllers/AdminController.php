@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginValidateRequest;
 use App\Http\Requests\RegistrationValidateRequest;
+use App\Http\Requests\PasswordEditRequest;
+use App\Http\Requests\UserEditStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -42,4 +44,20 @@ class AdminController extends Controller
         $data = $this->admin->forDashboard();
         return view('admin.dashboard', ['data' => $data]);
     }
+
+    public function editInfoStore(UserEditStoreRequest $request){
+        $this->admin->editStore($request);
+
+        return redirect()->route('admin.settings')->with('success', 'Update Successful');
+    }
+
+    public function editPasswordStore(PasswordEditRequest $request){
+        $result = $this->admin->passwordStore($request);
+        if($result == true){
+            return redirect()->route('admin.settings')->with('success', 'Update Successful');
+        }else{
+            return redirect()->back()->with('success', 'Current Password is Wrong');
+        }
+    }
+
 }

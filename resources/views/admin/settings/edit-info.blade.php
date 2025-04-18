@@ -1,4 +1,8 @@
-@extends('layouts.user')
+@extends('layouts.admin')
+
+@section('heading')
+    Edit Information
+@endsection
 
 @section('content')
 
@@ -6,27 +10,30 @@
     <div class="profile-card">
 
         <div class="profile-content">
-            <form action="{{ route('edit.password.store') }}" method="post">
+            <form action="{{ route('admin.info.store') }}" method="post">
                 @csrf
                 <div class="profile-details">
                     <div class="detail-group">
-                        <label>Current Password</label>
-                        <input type="password" name="current" class="edit-profile">
-                        <span>@error('current')
+                        <label>Name</label>
+                        <input class="edit-profile" name="name" value="{{ auth()->user()->name ?? ''}}">
+                        <span class="error-message">@error('name')
                             {{ $message }}
                         @enderror
                         </span>
                     </div>
 
                     <div class="detail-group">
-                        <label>New Password</label>
-                        <input type="password" name="new" class="edit-profile">
-                        <span>@error('new')
+                        <label>Email</label>
+                        <input class="edit-profile" name="email" value="{{ auth()->user()->email ?? ''}}">
+                        <span class="error-message">@error('email')
                             {{ $message }}
                         @enderror
                         </span>
                     </div>
+                    <div class="detail-group">
                     <button class="edit-button"> Save </button>
+                    </div>
+                        
                 </div>
             </form>
         </div>

@@ -1,4 +1,8 @@
-@extends('layouts.user')
+@extends('layouts.admin')
+
+@section('heading')
+    Edit Password 
+@endsection
 
 @section('content')
 
@@ -6,7 +10,7 @@
     <div class="profile-card">
 
         <div class="profile-content">
-            <form action="{{ route('edit.password.store') }}" method="post">
+            <form action="{{ route('admin.password.store') }}" method="post">
                 @csrf
                 <div class="profile-details">
                     <div class="detail-group">

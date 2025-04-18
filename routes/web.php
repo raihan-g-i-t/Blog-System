@@ -69,6 +69,13 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/admin/user',[UserController::class,'userList'])->name('user.list');
         Route::get('/admin/users',[UserController::class,'displayUsers'])->name('display.users');
         Route::get('/admin/user/delete/{id}',[UserController::class,'deleteUser'])->name('delete.user');
+        Route::view('/settings', 'admin.settings.settings')->name('admin.settings');
+        Route::view('/settings/info', 'admin.settings.edit-info')->name('admin.settings.info');
+        Route::post('/settings/info', [AdminController::class, 'editInfoStore'])->name('admin.info.store');
+        Route::view('/settings/password', 'admin.settings.edit-password')->name('admin.settings.password');
+        Route::post('/settings/password', [AdminController::class, 'editPasswordStore'])->name('admin.password.store');
+        Route::get('/comments', [CommentController::class, 'commentList'])->name('admin.comment');
+        Route::get('/comments/status/{id}', [CommentController::class, 'statusChange'])->name('comment.status.change');
         Route::get('/logout',[AdminController::class,'logout'])->name('logout');
     });
 });
