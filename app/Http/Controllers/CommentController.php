@@ -16,12 +16,7 @@ class CommentController extends Controller
         $this->comment = $commentService;
     }
     public function commentStore(CommentStoreRequest $request){
-
-        Comment::create([
-            'content' => $request->content,
-            'blog_id' => $request->blog_id,
-            'user_id' => Auth::user()->id
-        ]);
+        $this->comment->create($request);
 
         return redirect()->back()->with('success', 'Comment added successful');
     }

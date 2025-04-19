@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Comment;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class CommentService{
 
@@ -40,5 +41,13 @@ class CommentService{
         return Comment::where('blog_id', $id)
                             ->where('status', STATUS_ACTIVE)
                             ->get();
+    }
+
+    public function create($data){
+        Comment::create([
+            'content' => $data->content,
+            'blog_id' => $data->blog_id,
+            'user_id' => Auth::user()->id
+        ]);
     }
 }
