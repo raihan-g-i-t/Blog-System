@@ -29,7 +29,6 @@ class CommentService{
     public function statusChange($data){
         $comment = Comment::where('id', $data)
                     ->first();
-
         $comment->status == STATUS_ACTIVE ? $status = STATUS_INACTIVE : $status = STATUS_ACTIVE;
 
         $comment->update([

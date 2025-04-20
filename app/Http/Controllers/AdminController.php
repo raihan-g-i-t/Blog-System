@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginValidateRequest;
-use App\Http\Requests\RegistrationValidateRequest;
 use App\Http\Requests\PasswordEditRequest;
 use App\Http\Requests\UserEditStoreRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Services\AdminService;
-use Yajra\DataTables\DataTables;
-use App\Models\User;
+
 
 class AdminController extends Controller
 {

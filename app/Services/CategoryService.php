@@ -37,10 +37,14 @@ class CategoryService{
         return $this->getAllCategory()->where('status', STATUS_ACTIVE);
     }
 
-    public function create($data){
+    public function prepareCreateData($data){
         return [
             'title' => $data->title,
             'status' => $data->status
         ];
+    }
+
+    public function saveCategory($data){
+        Category::create($this->prepareCreateData($data));
     }
 }

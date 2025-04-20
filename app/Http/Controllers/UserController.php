@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginValidateRequest;
 use App\Http\Requests\PasswordEditRequest;
 use App\Http\Requests\UserEditStoreRequest;
-use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationValidateRequest;
 use Illuminate\Support\Facades\Auth;
-use Password;
+
 
 class UserController extends Controller
 {
@@ -72,7 +71,7 @@ class UserController extends Controller
     }
     public function editPasswordStore(PasswordEditRequest $request){
         $result = $this->userService->passwordStore($request);
-        if($result == true){
+        if($result){
             return redirect()->route('user.profile')->with('success', 'Update Successful');
         }else{
             return redirect()->back()->with('success', 'Current Password is Wrong');
@@ -82,7 +81,7 @@ class UserController extends Controller
     public function deleteUser($id){
         $result = $this->userService->deleteUser($id);
 
-        if($result == true){
+        if($result){
             return redirect()->back()->with('success', 'User Deleted Successful');
         }else{
             return redirect()->back()->with('success', 'User Deleted unSuccessful');

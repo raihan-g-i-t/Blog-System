@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use function PHPUnit\Framework\returnArgument;
 
 class CategoriesController extends Controller
 {
@@ -29,8 +27,7 @@ class CategoriesController extends Controller
     }
 
     public function saveCategory(CategoryCreateRequest $request){
-        Category::create($this->category->create($request));
-
+        $this->category->saveCategory($request);
         return redirect()->route('categories')->with('success', 'Category added Successful');
     }
 
@@ -47,7 +44,7 @@ class CategoriesController extends Controller
 
     public function editCategoryStore(CategoryCreateRequest $request, $id){
         $this->category->findCategory($id)
-                ->update($this->category->create($request));
+                ->update($this->category->prepareCreateData($request));
 
         return redirect()->route('categories')->with('success', 'Category updated Successful');
     }
