@@ -28,4 +28,14 @@ class LoginValidateRequest extends FormRequest
             'g-recaptcha-response' => [new ReCaptcha()]
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'We need your email address!',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email is already registered.',
+            'password.required' => 'Password is required.',
+        ];
+    }
 }

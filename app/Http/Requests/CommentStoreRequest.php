@@ -26,4 +26,10 @@ class CommentStoreRequest extends FormRequest
             'blog_id' => 'required',
         ];
     }
+
+    public function messages(){
+        return [
+            'content.required' => 'Content field can not be null'
+        ];
+    }
 }
