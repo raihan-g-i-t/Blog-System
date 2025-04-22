@@ -29,4 +29,12 @@ class BlogCreateRequest extends FormRequest
             'category_id' => 'required'
         ];
     }
+
+    public function messages(){
+        return [
+            'title.required' => 'Title is required',
+            'image.required' => 'You did not provide an image',
+            
+        ];
+    }
 }
